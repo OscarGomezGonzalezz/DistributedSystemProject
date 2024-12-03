@@ -1,3 +1,12 @@
+##### DESCRIPTION #####
+I have created a REST Service for HTTP operations(testable with POSTMAN), besides a Grpc one(testeable with POSTMAN too). You can find attached the diagram of the project
+
+##### DOCKER COMPOSE LOGIC #####
+
+docker-compose up --build -d
+
+##### STACK LOGIC #####
+
 docker login
 
 docker build -t oscargomezgonzalezz/order-service:1.1 ./orderservice
