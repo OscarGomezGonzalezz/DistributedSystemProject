@@ -24,9 +24,8 @@ async function insertOrder(name, isin, quantity, price, state) {
   }
 
 async function insertOrderOverload(name, isin, quantity) {
-   
     try {
-        for (let i = 0; i < 1000; i++) {
+        for (let i = 0; i < 100; i++) {
             console.info('Starting order creation...');
             // Await the execution of the DB insert to ensure sequential execution
             const result = await db.execute(

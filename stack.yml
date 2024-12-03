@@ -6,7 +6,7 @@ services:
 
     # This is not necessary since we include this image in the Dockerfile
     # image: node:alpine 
-    image: oscargomezgonzalezz/order-service:latest
+    image: oscargomezgonzalezz/order-service:1.1
     container_name: order-service-container
     
     ports:
@@ -23,7 +23,7 @@ services:
     build:
       context: ./confirmation-service  # Context of build where Dockerfile is located
       dockerfile: Dockerfile    # Dockerfile used for building the image
-    image: oscargomezgonzalezz/confirmation-service:latest
+    image: oscargomezgonzalezz/confirmation-service:1.1
     container_name: confirmation-service-container
     
     ports:
@@ -38,7 +38,7 @@ services:
       - mysql-service 
       - rabbitmq
     deploy:
-      replicas: 10
+      replicas: 2
 
   confirmation-service-grpc:
     build:
@@ -49,9 +49,9 @@ services:
     environment:
       NODE_ENV: production
     container_name: confirmation-service-grpc-container
-    image: oscargomezgonzalezz/confirmation-grpc-service:latest
+    image: oscargomezgonzalezz/confirmation-grpc-service:1.1
     deploy:
-      replicas: 10
+      replicas: 2
 
   mysql-service:
     image: mysql:8.0
@@ -73,7 +73,7 @@ services:
       #- app-volume-config:/etc/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Initialization script
     deploy:
-      replicas: 10  # MySQL typically runs as a single replica
+      replicas: 1  # MySQL typically runs as a single replica
 
 #volumes:
   #app-volume: {}  # Defining named volume for MySQL data
