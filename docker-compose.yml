@@ -1,0 +1,70 @@
+services:
+  order-service:
+    build:
+      context: ./orderservice  # Context of build where Dockerfile is located
+      dockerfile: Dockerfile    # Dockerfile used for building the image
+
+    # This is not necessary since we include this image in the Dockerfile
+    # image: node:alpine 
+    container_name: order-service-container
+    
+    ports:
+      - 3333:3333 
+
+    volumes:
+      # Files in the current directory are mounted in /home/node/app in the container
+      - ./:/home/node/app
+    depends_on:
+      - mysql-service  # Ensuring mysql-service starts before order-service
+  
+  confirmation-service:
+    build:
+      context: ./confirmation-service  # Context of build where Dockerfile is located
+      dockerfile: Dockerfile    # Dockerfile used for building the image
+
+    container_name: confirmation-service-container
+    
+    ports:
+      - 3334:3334 
+
+    volumes:
+      # Files in the current directory are mounted in /home/node/app in the container
+      - ./:/home/node/app
+
+    depends_on:
+      - order-service
+      - mysql-service 
+
+  confirmation-service-grpc:
+    build:
+      context: ./confirmation-service
+      dockerfile: Dockerfile.grpc
+    ports:
+      - "3335:3335"
+    environment:
+      NODE_ENV: production
+    container_name: confirmation-service-grpc-container
+
+  mysql-service:
+    image: mysql:8.0
+    restart: always
+    container_name: mysql-container
+    ports:
+      - 3306:3306  # Mapping host port 3306 to container port 3306
+
+    environment:
+      # Environment variables for MySQL service configuration
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=database1
+      - MYSQL_USER=node
+      - MYSQL_PASSWORD=1234
+
+    volumes:
+      # Named volumes for persistent MySQL data storage
+      #- app-volume:/var/lib/mysql
+      #- app-volume-config:/etc/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Initialization script
+
+#volumes:
+  #app-volume: {}  # Defining named volume for MySQL data
+  #app-volume-config: {}  # Defining named volume for MySQL config
