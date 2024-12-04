@@ -75,6 +75,22 @@ services:
     deploy:
       replicas: 1  # MySQL typically runs as a single replica
 
+  #mongodb-service:
+   # image: mongo:6.0
+    #restart: always
+    #container_name: mongodb-container
+    #ports:
+     # - 27017:27017  # Expose MongoDB's default port
+    #environment:
+     # MONGO_INITDB_ROOT_USERNAME: node
+      #MONGO_INITDB_ROOT_PASSWORD: password1234
+      #MONGO_INITDB_DATABASE: database1  # Default database
+    #volumes:
+     # - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js  # Initialization script
+    #deploy:
+     # replicas: 1
+
+
 #volumes:
   #app-volume: {}  # Defining named volume for MySQL data
   #app-volume-config: {}  # Defining named volume for MySQL config
