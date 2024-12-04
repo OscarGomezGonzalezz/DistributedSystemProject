@@ -33,5 +33,5 @@ app.get('/confirmation/:isin', async (req, res) => {
 //Start Server
 const PORT = 3334
 app.listen(PORT, () => {
-console.info(`ConfirmationService Server is running on port ${PORT}`);
+console.info(`ConfirmationService is running on port ${PORT}`);
 });

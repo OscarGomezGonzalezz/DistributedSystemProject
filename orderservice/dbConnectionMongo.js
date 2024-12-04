@@ -1,18 +1,12 @@
 const mongoose = require('mongoose');
 
 // MongoDB connection URI (replace with your actual credentials if needed)
-const uri = 'mongodb://ndoe:password1234@mongodb-service:27017/database1';
-
-// Options for the connection (optional but recommended)
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
+const uri = 'mongodb://node:password1234@mongodb-service:27017/database1';
 
 // Establish the connection
 const connectToDatabase = async () => {
   try {
-    await mongoose.connect(uri, options);
+    await mongoose.connect(uri);
     console.log('Connected to MongoDB successfully!');
   } catch (error) {
     console.error('Error connecting to MongoDB:', error.message);

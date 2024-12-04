@@ -13,7 +13,7 @@ const confirmationProto = grpc.loadPackageDefinition(packageDefinition).confirma
 
 // Create a client
 const client = new confirmationProto.Confirmation(
-    "confirmation-service-grpc:3335",
+    "mongoStack_confirmation-grpc-service:3335",
     grpc.credentials.createInsecure()
 );
 

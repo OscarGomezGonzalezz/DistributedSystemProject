@@ -22,7 +22,7 @@ function main() {
             console.error(`Error binding server:, ${err.message}`);
             return;
         }
-        console.log(`ConfirmationService Server is running on port ${bindPort}`);
+        console.log(`ConfirmationService Grpc is running on port ${bindPort}`);
     });
 }
 
